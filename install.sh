@@ -37,10 +37,8 @@ else
 fi
 
 # get awsome vim configure
-if [ -e ~/.vim_runtime/. ]; then # install only once
-    git clone https://github.com/amix/vimrc.git ~/.vim_runtime
-    sh ~/.vim_runtime/install_awesome_vimrc.sh
-fi
+git clone https://github.com/amix/vimrc.git ~/.vim_runtime
+sh ~/.vim_runtime/install_awesome_vimrc.sh
 
 # install vundle and append vimrc
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
