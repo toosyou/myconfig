@@ -2,6 +2,8 @@
 Use `curl` or `wget` to install packages and configures!  
 Both **linux** and **macos** supported!  
   
+**NOTE: myconfig will OVERWRITE you `oh-my-zsh`, `vim` and `tmux` configures!**
+  
 **via curl**
 ```shell
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/toosyou/myconfig/master/install.sh)"
@@ -11,6 +13,12 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/toosyou/myconfig/master/in
 ```shell
 sh -c "$(wget https://raw.githubusercontent.com/toosyou/myconfig/master/install.sh -O -)"
 ```
+
+## Snapshots
+### Ubuntu 14.04 LTS
+![ubuntu.gif](https://github.com/toosyou/myconfig/blob/master/ubuntu.gif)  
+- Only **one** password is needed to sudo `apt-get` and `chsh`.  
+- Whole installation lasts about **one** minute, and you're ready to roll!  
 
 # Installed packages
 - [brew](https://brew.sh/) (macos only)
