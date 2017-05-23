@@ -24,15 +24,15 @@ sh -c "$(wget https://raw.githubusercontent.com/toosyou/myconfig/master/install.
 1. [thefuck](https://github.com/nvbn/thefuck)
 1. vim  
     i. [Vundle](https://github.com/VundleVim/Vundle.vim)  
-    i. [The ultimate Vim configuration: vimrc](https://github.com/amix/vimrc)  
-    i. [delimitMate](https://github.com/Raimondi/delimitMate)  
+    ii. [The ultimate Vim configuration: vimrc](https://github.com/amix/vimrc)  
+    iii. [delimitMate](https://github.com/Raimondi/delimitMate)  
 1. tmux  
     i. mouse support  
-    i. [Tmux Plugin Manager](https://github.com/tmux-plugins/tpm) (tmux >= 2.3)  
-    i. [tmux-sensible](https://github.com/tmux-plugins/tmux-sensible) (tmux >= 2.3)  
-    i. [tmux-resurrect](https://github.com/tmux-plugins/tmux-resurrect) (tmux >= 2.3)  
-    i. [tmux-yank](https://github.com/tmux-plugins/tmux-yank) (tmux >= 2.3)  
-    i. [tmux-continuum](https://github.com/tmux-plugins/tmux-continuum)(tmux >= 2.3)  
+    ii. [Tmux Plugin Manager](https://github.com/tmux-plugins/tpm) (tmux >= 2.3)  
+    iii. [tmux-sensible](https://github.com/tmux-plugins/tmux-sensible) (tmux >= 2.3)  
+    iv. [tmux-resurrect](https://github.com/tmux-plugins/tmux-resurrect) (tmux >= 2.3)  
+    v. [tmux-yank](https://github.com/tmux-plugins/tmux-yank) (tmux >= 2.3)  
+    vi. [tmux-continuum](https://github.com/tmux-plugins/tmux-continuum)(tmux >= 2.3)  
 1. bc
 1. git
 1. wget
