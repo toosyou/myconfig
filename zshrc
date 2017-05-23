@@ -1,3 +1,5 @@
+
+export PATH=$PATH:~/.local/bin
 alias tmxu="tmux"
 alias txmu="tmux"
 alias tuxm="tmux"
