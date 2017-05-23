@@ -1,12 +1,14 @@
 #!/bin/bash
 
 # install necessary packages
-if [ `uname -s` == "Linux"];then
+if [ "$(uname -s)" = "Linux" ]; then
     sudo apt-get -y -f -m install zsh mosh vim tmux git wget thefuck
-elif [ `uname -s` == "Darwin"];then
+elif [ "$(uname -s)" = "Darwin" ]; then
+    echo $(uname -s)
     echo "This OS is not supported yet!"
     exit 0
 else
+    echo $(uname -s)
     echo "This OS is not supported yet!"
     exit 0
 fi
