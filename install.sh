@@ -67,6 +67,7 @@ sed -i 's/plugins=(/plugins=(zsh-syntax-highlighting /g' ~/.zshrc
 echo "source $CLONE_PATH/zshrc" >> ~/.zshrc
 
 # chsh and switch to zsh
+USERNAME=`whoami`
 printf "Time to change your default shell to zsh!\n"
-chsh -s $(grep /zsh$ /etc/shells | tail -1)
+sudo usermod -s $(grep /zsh$ /etc/shells | tail -1) $USERNAME
 env zsh
