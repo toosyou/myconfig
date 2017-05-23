@@ -64,7 +64,7 @@ sed -i 's/plugins=(/plugins=(zsh-autosuggestions /g' ~/.zshrc
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 sed -i 's/plugins=(/plugins=(zsh-syntax-highlighting /g' ~/.zshrc
 # append .zshrc
-cat zshrc >> ~/.zshrc
+echo "source $CLONE_PATH/zshrc" >> ~/.zshrc
 
 # chsh and switch to zsh
 printf "Time to change your default shell to zsh!\n"
