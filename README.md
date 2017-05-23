@@ -13,31 +13,31 @@ sh -c "$(wget https://raw.githubusercontent.com/toosyou/myconfig/master/install.
 ```
 
 # Installed packages
-0. [brew](https://brew.sh/) (macos only)
-1. zsh  
-    i. [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)  
-    ii. [bullet-train.zsh](https://github.com/caiogondim/bullet-train.zsh)  
-    iii. [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)  
-    iv. [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)  
-    v. some **aliases** with commands that I always type wrong.  
-1. [mosh](https://mosh.org/)
-1. [thefuck](https://github.com/nvbn/thefuck)
-1. vim  
-    i. [Vundle](https://github.com/VundleVim/Vundle.vim)  
-    ii. [The ultimate Vim configuration: vimrc](https://github.com/amix/vimrc)  
-    iii. [delimitMate](https://github.com/Raimondi/delimitMate)  
-1. tmux  
-    i. mouse support  
-    ii. [Tmux Plugin Manager](https://github.com/tmux-plugins/tpm) (tmux >= 2.3)  
-    iii. [tmux-sensible](https://github.com/tmux-plugins/tmux-sensible) (tmux >= 2.3)  
-    iv. [tmux-resurrect](https://github.com/tmux-plugins/tmux-resurrect) (tmux >= 2.3)  
-    v. [tmux-yank](https://github.com/tmux-plugins/tmux-yank) (tmux >= 2.3)  
-    vi. [tmux-continuum](https://github.com/tmux-plugins/tmux-continuum)(tmux >= 2.3)  
-1. bc
-1. git
-1. wget
-1. python3
-1. pip3
+- [brew](https://brew.sh/) (macos only)
+- zsh  
+    - [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)  
+    - [bullet-train.zsh](https://github.com/caiogondim/bullet-train.zsh)  
+    - [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)  
+    - [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)  
+    - some **aliases** with commands that I always type wrong.  
+- [mosh](https://mosh.org/)
+- [thefuck](https://github.com/nvbn/thefuck)
+- vim  
+    - [Vundle](https://github.com/VundleVim/Vundle.vim)  
+    - [The ultimate Vim configuration: vimrc](https://github.com/amix/vimrc)  
+    - [delimitMate](https://github.com/Raimondi/delimitMate)  
+- tmux  
+    - mouse support  
+    - [Tmux Plugin Manager](https://github.com/tmux-plugins/tpm) (tmux >= 2.3)  
+    - [tmux-sensible](https://github.com/tmux-plugins/tmux-sensible) (tmux >= 2.3)  
+    - [tmux-resurrect](https://github.com/tmux-plugins/tmux-resurrect) (tmux >= 2.3)  
+    - [tmux-yank](https://github.com/tmux-plugins/tmux-yank) (tmux >= 2.3)  
+    - [tmux-continuum](https://github.com/tmux-plugins/tmux-continuum)(tmux >= 2.3)  
+- bc
+- git
+- wget
+- python3
+- pip3
 
 # Contact me
 - email: toosyou.tw@gmail.com
