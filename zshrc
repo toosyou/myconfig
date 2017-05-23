@@ -1,5 +1,5 @@
 
-export PATH=$PATH:~/.local/bin
+PATH=$PATH:~/.local/bin
 alias tmxu="tmux"
 alias txmu="tmux"
 alias tuxm="tmux"
@@ -22,5 +22,7 @@ eval $(thefuck --alias fk)
 
 cd;
 
-export TERM="xterm-256color"
+TERM="xterm-256color"
+LC_CTYPE=en_US.UTF-8
+LC_ALL=en_US.UTF-8
 
