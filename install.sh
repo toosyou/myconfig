@@ -2,7 +2,9 @@
 
 # install necessary packages
 if [ "$(uname -s)" = "Linux" ]; then
-    sudo apt-get -y -f -m install zsh mosh vim tmux git wget thefuck
+    sudo apt-get update
+    sudo apt-get -y -f -m install zsh mosh vim tmux 
+    sudo apt-get -y -f -m git wget python3-dev python3-pip
 elif [ "$(uname -s)" = "Darwin" ]; then
     echo $(uname -s)
     echo "This OS is not supported yet!"
@@ -13,8 +15,11 @@ else
     exit 0
 fi
 
+# install thefuck
+pip3 install --user thefuck
+
 # link tmux configure
-ln -s tmux.conf ~/.tmux.conf
+ln -s ./tmux.conf ~/.tmux.conf
 
 # get awsome vim configure
 git clone https://github.com/amix/vimrc.git ~/.vim_runtime
@@ -22,11 +27,13 @@ sh ~/.vim_runtime/install_awesome_vimrc.sh
 
 # install vundle and append vimrc
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-ln -s vundle.vim ~/.vundle.vim
+ln -s ./vundle.vim ~/.vundle.vim
 sed -i '1s/^/source ~/.vundle.vim\n/' ~/.vimrc
 vim +PluginInstall +qall # install plugins
+exit 0
 
 # install oh-my-zsh, font, autosuggesion and zsh-syntax-highlighting
+ZSH_CUSTOM=~/.oh-my-zsh/custom
 # oh-my-zsh
 sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 # font
