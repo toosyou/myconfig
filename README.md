@@ -25,6 +25,7 @@ sh -c "$(wget https://raw.githubusercontent.com/toosyou/myconfig/master/install.
 - zsh  
     - [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)  
     - [bullet-train.zsh](https://github.com/caiogondim/bullet-train.zsh)  
+      - Which needs powerline compatible fonts like [Vim Powerline patched fonts](https://github.com/Lokaltog/powerline-fonts), [Input Mono](http://input.fontbureau.com/) or [Monoid](http://larsenwork.com/monoid/).  
     - [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)  
     - [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)  
     - some **aliases** with commands that I always type wrong.  
