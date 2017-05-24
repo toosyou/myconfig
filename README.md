@@ -2,7 +2,7 @@
 Use `curl` or `wget` to install packages and configures!  
 Both **linux** and **macos** supported!  
   
-**NOTE: myconfig will OVERWRITE you `oh-my-zsh`, `vim` and `tmux` configures!**
+**NOTE: myconfig will OVERWRITE your `oh-my-zsh`, `vim` and `tmux` configures!**
   
 **via curl**
 ```shell
