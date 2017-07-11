@@ -4,13 +4,13 @@
 is_sudoer=0
 while [ "$is_sudoer" != "y" -a "$is_sudoer" != "Y" -a "$is_sudoer" != "n" -a "$is_sudoer" != "N" -a "$is_sudoer" != "" ]
 do
-    read -p "Are you a sudoer? [y/N]: " is_sudoer
+	read -p "Are you a sudoer? [y/N]: " is_sudoer
 done
 
-if [ "$is_sudoer" == "y" -o "$is_sudoer" == "Y" ]; then
-    is_sudoer=1
+if [ "$is_sudoer" = "y" -o "$is_sudoer" = "Y" ]; then
+	is_sudoer=1
 else
-    is_sudoer=0
+	is_sudoer=0
 fi
 
 # install necessary packages
