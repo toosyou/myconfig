@@ -20,7 +20,7 @@ else
 fi
 
 # git clone every thing
-CLONE_PATH=$HOME/myconfig
+CLONE_PATH=$HOME/.myconfig
 git clone https://github.com/toosyou/myconfig $CLONE_PATH
 
 # install thefuck if not exists
