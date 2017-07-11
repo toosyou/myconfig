@@ -7,8 +7,6 @@ if [ "$(uname -s)" = "Linux" ]; then
     for i in zsh mosh vim tmux bc node install git wget python3-dev python3-pip nodejs; do
         sudo apt-get --yes --force-yes -f -m install $i
     done
-    # sudo apt-get --yes --force-yes -f -m install zsh mosh vim tmux bc node
-    # sudo apt-get --yes --force-yes -f -m install git wget python3-dev python3-pip
 elif [ "$(uname -s)" = "Darwin" ]; then # mac
     echo $(uname -s)
     # check if brew exists. If not, install it
@@ -29,7 +27,7 @@ git clone https://github.com/toosyou/myconfig $CLONE_PATH
 hash thefuck 2>/dev/null || pip3 install --user thefuck
 
 # link tmux configure
-if [ $( echo "$(tmux -V| cut -d" " -f 2| tr -d $'\n'| tr -d $'\r') <= 2.3 " | bc -l ) -eq 1 ];then
+if [ $( echo "$(tmux -V| cut -d" " -f 2| tr -d $'\n'| tr -d $'\r') <= 2.0 " | bc -l ) -eq 1 ];then
     ln -sf $CLONE_PATH/tmux19.conf ~/.tmux.conf
 else
     # install tmux-package-manager(TPM)
