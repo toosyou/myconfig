@@ -1,26 +1,41 @@
 #!/bin/bash
 
-# install necessary packages
-if [ "$(uname -s)" = "Linux" ]; then
-    echo $(uname -s)
-    sudo apt-get update
-    for i in zsh mosh vim tmux bc node install git wget python3-dev python3-pip nodejs; do
-        sudo apt-get --yes --force-yes -f -m install $i
-    done
-elif [ "$(uname -s)" = "Darwin" ]; then # mac
-    echo $(uname -s)
-    # check if brew exists. If not, install it
-    hash brew 2>/dev/null || /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-    brew install wget zsh mosh tmux
-    brew install git python3-dev python3-pip
+# check if the user has sudo privilege
+is_sudoer=0
+while [ "$is_sudoer" != "y" -a "$is_sudoer" != "Y" -a "$is_sudoer" != "n" -a "$is_sudoer" != "N" -a "$is_sudoer" != "" ]
+do
+    read -p "Are you a sudoer? [y/N]: " is_sudoer
+done
+
+if [ "$is_sudoer" == "y" -o "$is_sudoer" == "Y" ]; then
+    is_sudoer=1
 else
-    echo $(uname -s)
-    echo "This OS is not supported yet!"
-    exit 0
+    is_sudoer=0
+fi
+
+# install necessary packages
+if [ $is_sudoer -eq 1 ]; then
+	if [ "$(uname -s)" = "Linux" ]; then
+    	echo $(uname -s)
+	    sudo apt-get update
+	    for i in zsh mosh vim tmux bc node install git wget python3-dev python3-pip nodejs; do
+	        sudo apt-get --yes --force-yes -f -m install $i
+	    done
+	elif [ "$(uname -s)" = "Darwin" ]; then # mac
+	    echo $(uname -s)
+	    # check if brew exists. If not, install it
+	    hash brew 2>/dev/null || /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+	    brew install wget zsh mosh tmux
+	    brew install git python3-dev python3-pip
+	else
+	    echo $(uname -s)
+	    echo "This OS is not supported yet!"
+	    exit 0
+	fi
 fi
 
 # git clone every thing
-CLONE_PATH=$HOME/myconfig
+CLONE_PATH=$HOME/.myconfig
 git clone https://github.com/toosyou/myconfig $CLONE_PATH
 
 # install thefuck if not exists
@@ -68,5 +83,18 @@ echo "source $CLONE_PATH/zshrc" >> ~/.zshrc
 # chsh and switch to zsh
 USERNAME=`whoami`
 printf "Time to change your default shell to zsh!\n"
-sudo usermod -s $(grep /zsh$ /etc/shells | tail -1) $USERNAME
+
+if [ $is_sudoer -eq 1 ]; then
+    sudo usermod -s $(grep /zsh$ /etc/shells | tail -1) $USERNAME
+else
+    chsh -s $(which zsh)
+    # cannot change shell
+    if [ $? -ne 0 ]; then
+        echo "***********************************"
+        echo "****** SHELL CHANGING FAILED ******"
+        echo "**** please contact the admin! ****"
+        echo "***********************************"
+    fi
+fi
+
 env zsh
