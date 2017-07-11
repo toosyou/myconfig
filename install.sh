@@ -90,10 +90,11 @@ else
     chsh -s $(which zsh)
     # cannot change shell
     if [ $? -ne 0 ]; then
-        echo "***********************************"
-        echo "****** SHELL CHANGING FAILED ******"
-        echo "**** please contact the admin! ****"
-        echo "***********************************"
+        echo "***************************************"
+        echo "******** SHELL CHANGING FAILED ********"
+	echo "** Try "chsh -s $(which zsh)" again! **"
+        echo "*** Or contact the admin if failed! ***"
+        echo "***************************************"
     fi
 fi
 
