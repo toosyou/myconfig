@@ -4,7 +4,7 @@
 if [ "$(uname -s)" = "Linux" ]; then
     echo $(uname -s)
     sudo apt-get update
-    for i in zsh mosh vim tmux bc node install git wget python3-dev python3-pip; do
+    for i in zsh mosh vim tmux bc node install git wget python3-dev python3-pip nodejs; do
         sudo apt-get --yes --force-yes -f -m install $i
     done
     # sudo apt-get --yes --force-yes -f -m install zsh mosh vim tmux bc node
