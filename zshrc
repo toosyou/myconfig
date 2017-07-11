@@ -17,6 +17,7 @@ alias maek="make"
 alias amek="make"
 alias ll="ls -al"
 alias rm="rm -i"
+alias node=nodejs
 
 eval $(thefuck --alias fk)
 
