@@ -18,14 +18,14 @@ if [ $is_sudoer -eq 1 ]; then
 	if [ "$(uname -s)" = "Linux" ]; then
     	echo $(uname -s)
 	    sudo apt-get update
-	    for i in zsh mosh vim tmux bc node install git wget python3-dev python3-pip nodejs; do
+	    for i in zsh mosh vim tmux bc node install git wget python3-dev python3-pip nodejs xsel; do
 	        sudo apt-get --yes --force-yes -f -m install $i
 	    done
 	elif [ "$(uname -s)" = "Darwin" ]; then # mac
 	    echo $(uname -s)
 	    # check if brew exists. If not, install it
 	    hash brew 2>/dev/null || /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-	    brew install wget zsh mosh tmux
+	    brew install wget zsh mosh tmux reattach-to-user-namespace
 	    brew install git python3-dev python3-pip
 	else
 	    echo $(uname -s)
