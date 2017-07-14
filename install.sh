@@ -18,7 +18,7 @@ if [ $is_sudoer -eq 1 ]; then
 	if [ "$(uname -s)" = "Linux" ]; then
     	echo $(uname -s)
 	    sudo apt-get update
-	    for i in zsh mosh vim tmux bc node install git wget python3-dev python3-pip nodejs xsel; do
+	    for i in zsh mosh vim tmux node install git wget python3-dev python3-pip nodejs xsel; do
 	        sudo apt-get --yes --force-yes -f -m install $i
 	    done
 	elif [ "$(uname -s)" = "Darwin" ]; then # mac
@@ -42,7 +42,10 @@ git clone https://github.com/toosyou/myconfig $CLONE_PATH
 hash thefuck 2>/dev/null || pip3 install --user thefuck
 
 # link tmux configure
-if [ $( echo "$(tmux -V| cut -d" " -f 2| tr -d $'\n'| tr -d $'\r') <= 2.0 " | bc -l ) -eq 1 ];then
+min_tmux_version=2.0
+tmux_version=$(tmux -V| cut -d" " -f 2| tr -d $'\n'| tr -d $'\r')
+tmux_version_check=$(awk "BEGIN{ print ($tmux_version > $min_tmux_version) ? \"1\" : \"0\" }")
+if [ $tmux_version_check -eq 0 ];then # use mini tmux configure
     ln -sf $CLONE_PATH/tmux19.conf ~/.tmux.conf
 else
     # install tmux-package-manager(TPM)
@@ -92,7 +95,7 @@ else
     if [ $? -ne 0 ]; then
         echo "***************************************"
         echo "******** SHELL CHANGING FAILED ********"
-	echo "** Try "chsh -s $(which zsh)" again! **"
+        echo "** Try 'chsh -s $(which zsh)' again! **"
         echo "*** Or contact the admin if failed! ***"
         echo "***************************************"
     fi
