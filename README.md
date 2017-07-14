@@ -42,7 +42,6 @@ sh -c "$(wget https://raw.githubusercontent.com/toosyou/myconfig/master/install.
     - [tmux-resurrect](https://github.com/tmux-plugins/tmux-resurrect) (tmux >= 2.3)  
     - [tmux-yank](https://github.com/tmux-plugins/tmux-yank) (tmux >= 2.3)  
     - [tmux-continuum](https://github.com/tmux-plugins/tmux-continuum)(tmux >= 2.3)  
-- bc
 - git
 - wget
 - python3
