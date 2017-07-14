@@ -56,7 +56,6 @@ if [ $tmux_version_check -eq 0 ];then # use mini tmux configure
     ln -sf $CLONE_PATH/tmux19.conf ~/.tmux.conf
 else
     # install tmux-package-manager(TPM)
-    # git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm || git -C ~/.tmux/plugins/tpm pull
     git_get https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
     ln -sf $CLONE_PATH/tmux.conf ~/.tmux.conf
     # install packages
