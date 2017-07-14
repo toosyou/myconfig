@@ -1,5 +1,14 @@
 #!/bin/bash
 
+function git_get(){
+    original_path=$(pwd)
+    if cd $2; then # exists then update it
+        git pull && cd $original_path
+    else # not exists then clone it
+        git clone $1 $2
+    fi
+}
+
 # check if the user has sudo privilege
 is_sudoer=0
 while [ "$is_sudoer" != "y" -a "$is_sudoer" != "Y" -a "$is_sudoer" != "n" -a "$is_sudoer" != "N" -a "$is_sudoer" != "" ]
@@ -36,7 +45,7 @@ fi
 
 # git clone every thing
 CLONE_PATH=$HOME/.myconfig
-git clone https://github.com/toosyou/myconfig $CLONE_PATH
+git_get https://github.com/toosyou/myconfig $CLONE_PATH
 
 # install thefuck if not exists
 hash thefuck 2>/dev/null || pip3 install --user thefuck
@@ -49,18 +58,21 @@ if [ $tmux_version_check -eq 0 ];then # use mini tmux configure
     ln -sf $CLONE_PATH/tmux19.conf ~/.tmux.conf
 else
     # install tmux-package-manager(TPM)
-    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm || git -C ~/.tmux/plugins/tpm pull
+    # git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm || git -C ~/.tmux/plugins/tpm pull
+    git_get https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
     ln -sf $CLONE_PATH/tmux.conf ~/.tmux.conf
     # install packages
     ~/.tmux/plugins/tpm/scripts/install_plugins.sh
 fi
 
 # get awsome vim configure
-git clone https://github.com/amix/vimrc.git ~/.vim_runtime
+git_get https://github.com/amix/vimrc.git ~/.vim_runtime
 sh ~/.vim_runtime/install_awesome_vimrc.sh
+# link my runtime configure
+ln -sf $CLONE_PATH/vim_runtimerc.vim  ~/.vim_runtime/my_configs.vim
 
 # install vundle and append vimrc
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+git_get https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 ln -sf $CLONE_PATH/vundle.vim ~/.vundle.vim
 sed -i '1isource ~/.vundle.vim\n' ~/.vimrc
 vim +PluginInstall +qall # install plugins
@@ -75,10 +87,10 @@ mkdir -p $ZSH_CUSTOM/themes
 wget -O $ZSH_CUSTOM/themes/bullet-train.zsh-theme https://raw.githubusercontent.com/caiogondim/bullet-train.zsh/master/bullet-train.zsh-theme
 sed -i 's/ZSH_THEME=/ZSH_THEME="bullet-train" # /g' ~/.zshrc
 # autosuggesion
-git clone git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
+git_get git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
 sed -i 's/plugins=(/plugins=(zsh-autosuggestions /g' ~/.zshrc
 # zsh-syntax-highlighting
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+git_get https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 sed -i 's/plugins=(/plugins=(zsh-syntax-highlighting /g' ~/.zshrc
 # append .zshrc
 echo "source $CLONE_PATH/zshrc" >> ~/.zshrc
