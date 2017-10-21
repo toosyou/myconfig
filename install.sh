@@ -34,7 +34,7 @@ if [ $is_sudoer -eq 1 ]; then
 	    hash brew 2>/dev/null || /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 	    brew install wget zsh mosh tmux reattach-to-user-namespace
 	    brew install git python3 node gnu-sed
-        brew install thefuck
+        brew install thefuck cmake
         npm install -g bower
 	else
 	    echo $(uname -s)
