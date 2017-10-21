@@ -86,6 +86,8 @@ else
     vim +PluginInstall +qall # install plugins
 fi
 
+~/.vim/bundle/YouCompleteMe/install.py --clang-completer
+
 # install oh-my-zsh, font, autosuggesion and zsh-syntax-highlighting
 ZSH_CUSTOM=~/.oh-my-zsh/custom
 # oh-my-zsh

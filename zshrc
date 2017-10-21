@@ -17,7 +17,7 @@ alias maek="make"
 alias amek="make"
 alias ll="ls -al"
 alias rm="rm -i"
-alias node=nodejs
+alias node="/usr/local/bin/node"
 
 eval $(thefuck --alias fk)
 
@@ -26,4 +26,3 @@ cd;
 TERM="xterm-256color"
 LC_CTYPE=en_US.UTF-8
 LC_ALL=en_US.UTF-8
-
