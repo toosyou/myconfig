@@ -73,10 +73,10 @@ ln -sf $CLONE_PATH/vim_runtimerc.vim  ~/.vim_runtime/my_configs.vim
 git_get https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 ln -sf $CLONE_PATH/vundle.vim ~/.vundle.vim
 if [ "$(uname -s)" = "Darwin" ]; then # mac
-	sed -i '.bak' '1isource ~/.vundle.vim\n' ~/.vimrc
+	sed -i '.bak' '1i\'$'\n''source ~/.vundle.vim\n' ~/.vimrc
 	rm -rf ~/.vimrc
 else
-	sed -i '1isource ~/.vundle.vim\n' ~/.vimrc
+	sed -i '1isource ~/.vundle.vim'$'\n' ~/.vimrc
 fi
 vim +PluginInstall +qall # install plugins
 
