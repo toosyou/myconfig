@@ -33,8 +33,9 @@ if [ $is_sudoer -eq 1 ]; then
 	    # check if brew exists. If not, install it
 	    hash brew 2>/dev/null || /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 	    brew install wget zsh mosh tmux reattach-to-user-namespace
-	    brew install git python3 node
-		npm install -g bower
+	    brew install git python3 node gnu-sed
+        brew install thefuck
+        npm install -g bower
 	else
 	    echo $(uname -s)
 	    echo "This OS is not supported yet!"
@@ -47,7 +48,9 @@ CLONE_PATH=$HOME/.myconfig
 git_get https://github.com/toosyou/myconfig $CLONE_PATH
 
 # install thefuck if not exists
-hash thefuck 2>/dev/null || pip3 install --user thefuck
+if [ "$(uname -s)" = "Linux" ]; then
+    hash thefuck 2>/dev/null || pip3 install --user thefuck
+fi
 
 # link tmux configure
 min_tmux_version=2.0
@@ -73,17 +76,24 @@ ln -sf $CLONE_PATH/vim_runtimerc.vim  ~/.vim_runtime/my_configs.vim
 git_get https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 ln -sf $CLONE_PATH/vundle.vim ~/.vundle.vim
 if [ "$(uname -s)" = "Darwin" ]; then # mac
-	sed -i '.bak' '1i\'$'\n''source ~/.vundle.vim\n' ~/.vimrc
-	rm -rf ~/.vimrc
+    gsed -i '1isource ~/.vundle.vim'$'\n' ~/.vimrc
 else
 	sed -i '1isource ~/.vundle.vim'$'\n' ~/.vimrc
 fi
-vim +PluginInstall +qall # install plugins
+if [ "$(uname -s)" = "Darwin" ]; then # mac
+    mvim -v +PluginInstall +qall # install plugins
+else
+    vim +PluginInstall +qall # install plugins
+fi
 
 # install oh-my-zsh, font, autosuggesion and zsh-syntax-highlighting
 ZSH_CUSTOM=~/.oh-my-zsh/custom
 # oh-my-zsh
-sh -c "`wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O - | sed 's/chsh -s/# chsh -s/g' | sed 's/env zsh/# env zsh/g'`"
+if [ "$(uname -s)" = "Darwin" ]; then # mac
+    sh -c "`wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O - | gsed 's/chsh -s/# chsh -s/g' | gsed 's/env zsh/# env zsh/g'`"
+else
+    sh -c "`wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O - | sed 's/chsh -s/# chsh -s/g' | sed 's/env zsh/# env zsh/g'`"
+fi
 
 wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/templates/zshrc.zsh-template -O ~/.zshrc
 # font
@@ -91,16 +101,15 @@ mkdir -p $ZSH_CUSTOM/themes
 wget -O $ZSH_CUSTOM/themes/bullet-train.zsh-theme https://raw.githubusercontent.com/caiogondim/bullet-train.zsh/master/bullet-train.zsh-theme
 
 if [ "$(uname -s)" = "Darwin" ]; then # mac
-	sed -i '.bak' 's/ZSH_THEME=/ZSH_THEME="bullet-train" # /g' ~/.zshrc
-	rm -rf ~/.zshrc.bak
+    gsed -i 's/ZSH_THEME=/ZSH_THEME="bullet-train" # /g' ~/.zshrc
+    gsed -i '1ialias vim="mvim -v"'$'\n' ~/.zshrc
 else
 	sed -i 's/ZSH_THEME=/ZSH_THEME="bullet-train" # /g' ~/.zshrc
 fi
 # autosuggesion
 git_get git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
 if [ "$(uname -s)" = "Darwin" ]; then # mac
-	sed -i '.bak' 's/plugins=(/plugins=(zsh-autosuggestions /g' ~/.zshrc
-	rm -rf ~/.zshrc.bak
+    gsed -i 's/plugins=(/plugins=(zsh-autosuggestions /g' ~/.zshrc
 else
 	sed -i 's/plugins=(/plugins=(zsh-autosuggestions /g' ~/.zshrc
 fi
@@ -108,8 +117,7 @@ fi
 # zsh-syntax-highlighting
 git_get https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 if [ "$(uname -s)" = "Darwin" ]; then # mac
-	sed -i '.bak' 's/plugins=(/plugins=(zsh-syntax-highlighting /g' ~/.zshrc
-	rm -rf ~/.zshrc.bak
+    gsed -i 's/plugins=(/plugins=(zsh-syntax-highlighting /g' ~/.zshrc
 else
 	sed -i 's/plugins=(/plugins=(zsh-syntax-highlighting /g' ~/.zshrc
 fi
