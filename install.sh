@@ -82,13 +82,31 @@ wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/templates/z
 # font
 mkdir -p $ZSH_CUSTOM/themes
 wget -O $ZSH_CUSTOM/themes/bullet-train.zsh-theme https://raw.githubusercontent.com/caiogondim/bullet-train.zsh/master/bullet-train.zsh-theme
-sed -i 's/ZSH_THEME=/ZSH_THEME="bullet-train" # /g' ~/.zshrc
+
+if [ "$(uname -s)" = "Darwin" ]; then # mac
+	sed -i '.bak' 's/ZSH_THEME=/ZSH_THEME="bullet-train" # /g' ~/.zshrc
+	rm -rf ~/.zshrc.bak
+else
+	sed -i 's/ZSH_THEME=/ZSH_THEME="bullet-train" # /g' ~/.zshrc
+fi
 # autosuggesion
 git_get git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
-sed -i 's/plugins=(/plugins=(zsh-autosuggestions /g' ~/.zshrc
+if [ "$(uname -s)" = "Darwin" ]; then # mac
+	sed -i '.bak' 's/plugins=(/plugins=(zsh-autosuggestions /g' ~/.zshrc
+	rm -rf ~/.zshrc.bak
+else
+	sed -i 's/plugins=(/plugins=(zsh-autosuggestions /g' ~/.zshrc
+fi
+
 # zsh-syntax-highlighting
 git_get https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-sed -i 's/plugins=(/plugins=(zsh-syntax-highlighting /g' ~/.zshrc
+if [ "$(uname -s)" = "Darwin" ]; then # mac
+	sed -i 's/plugins=(/plugins=(zsh-syntax-highlighting /g' ~/.zshrc
+	rm -rf ~/.zshrc.bak
+else
+	sed -i 's/plugins=(/plugins=(zsh-syntax-highlighting /g' ~/.zshrc
+fi
+
 # append .zshrc
 echo "source $CLONE_PATH/zshrc" >> ~/.zshrc
 
@@ -96,7 +114,7 @@ echo "source $CLONE_PATH/zshrc" >> ~/.zshrc
 USERNAME=`whoami`
 printf "Time to change your default shell to zsh!\n"
 
-if [ $is_sudoer -eq 1 ]; then
+if [ $is_sudoer -eq 1 -a "$(uname -s)" != "Darwin" ]; then
     sudo usermod -s $(grep /zsh$ /etc/shells | tail -1) $USERNAME
 else
     chsh -s $(which zsh)
