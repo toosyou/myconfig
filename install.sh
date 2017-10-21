@@ -33,7 +33,7 @@ if [ $is_sudoer -eq 1 ]; then
 	    # check if brew exists. If not, install it
 	    hash brew 2>/dev/null || /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 	    brew install wget zsh mosh tmux reattach-to-user-namespace
-	    brew install git python3-dev python3-pip
+	    brew install git python3
 	else
 	    echo $(uname -s)
 	    echo "This OS is not supported yet!"
