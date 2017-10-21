@@ -33,7 +33,8 @@ if [ $is_sudoer -eq 1 ]; then
 	    # check if brew exists. If not, install it
 	    hash brew 2>/dev/null || /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 	    brew install wget zsh mosh tmux reattach-to-user-namespace
-	    brew install git python3
+	    brew install git python3 node
+		npm install -g bower
 	else
 	    echo $(uname -s)
 	    echo "This OS is not supported yet!"
@@ -111,7 +112,7 @@ fi
 # zsh-syntax-highlighting
 git_get https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 if [ "$(uname -s)" = "Darwin" ]; then # mac
-	sed -i 's/plugins=(/plugins=(zsh-syntax-highlighting /g' ~/.zshrc
+	sed -i '.bak' 's/plugins=(/plugins=(zsh-syntax-highlighting /g' ~/.zshrc
 	rm -rf ~/.zshrc.bak
 else
 	sed -i 's/plugins=(/plugins=(zsh-syntax-highlighting /g' ~/.zshrc
