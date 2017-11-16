@@ -35,6 +35,7 @@ bash -c "$(wget https://raw.githubusercontent.com/toosyou/myconfig/master/instal
     - [Vundle](https://github.com/VundleVim/Vundle.vim)  
     - [The ultimate Vim configuration: vimrc](https://github.com/amix/vimrc)  
     - [delimitMate](https://github.com/Raimondi/delimitMate)  
+    - [YouCompleteMe](https://github.com/Valloric/YouCompleteMe)(with C-family languages support)
 - tmux  
     - mouse support  
     - [Tmux Plugin Manager](https://github.com/tmux-plugins/tpm) (tmux >= 2.3)  
