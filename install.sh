@@ -28,6 +28,8 @@ if [ $is_sudoer -eq 1 ]; then
 	    for i in zsh mosh vim tmux node install git wget python3-dev python3-pip nodejs xsel; do
 	        sudo apt-get --yes --force-yes -f -m install $i
 	    done
+	    # fix 'no such file: /usr/local/bin/node' issue
+	    sudo ln -s /usr/bin/nodejs /usr/local/bin/node
 	elif [ "$(uname -s)" = "Darwin" ]; then # mac
 	    echo $(uname -s)
 	    # check if brew exists. If not, install it
