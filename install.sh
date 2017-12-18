@@ -25,7 +25,7 @@ if [ $is_sudoer -eq 1 ]; then
 	if [ "$(uname -s)" = "Linux" ]; then
     	echo $(uname -s)
 	    sudo apt-get update
-	    for i in zsh mosh vim tmux node install git wget python3-dev python3-pip nodejs xsel; do
+	    for i in zsh mosh vim tmux node install git wget python3-dev python3-pip nodejs xsel cmake; do
 	        sudo apt-get --yes --force-yes -f -m install $i
 	    done
 	    # fix 'no such file: /usr/local/bin/node' issue
@@ -35,7 +35,7 @@ if [ $is_sudoer -eq 1 ]; then
 	    # check if brew exists. If not, install it
 	    hash brew 2>/dev/null || /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 	    brew install wget zsh mosh tmux reattach-to-user-namespace
-	    brew install git python3 node gnu-sed
+	    brew install git python3 node gnu-sed cmake
         brew install thefuck cmake
         npm install -g bower
 	else
