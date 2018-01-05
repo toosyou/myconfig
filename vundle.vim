@@ -12,6 +12,9 @@ Plugin 'airblade/vim-gitgutter'
 call vundle#end()
 filetype plugin indent on
 
+let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/examples/.ycm_extra_conf.py'
+let g:ycm_completion_confirm_key = '<enter>'
+
 set mouse=a
 set number
 set foldenable
