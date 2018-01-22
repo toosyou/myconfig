@@ -37,6 +37,8 @@ if [ $is_sudoer -eq 1 ]; then
 	    brew install wget zsh mosh tmux reattach-to-user-namespace
 	    brew install git python3 node gnu-sed cmake
         brew install thefuck cmake
+        brew install vim && brew install macvim
+        brew link macvim
         npm install -g bower
 	else
 	    echo $(uname -s)
