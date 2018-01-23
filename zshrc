@@ -28,4 +28,4 @@ LC_CTYPE=en_US.UTF-8
 LC_ALL=en_US.UTF-8
 
 # remove context, ruby, and nvm from the prompt
-export BULLETTRAIN_PROMPT_ORDER=(${BULLETTRAIN_PROMPT_ORDER:#(context|ruby|nvm)})
+# export BULLETTRAIN_PROMPT_ORDER=(${BULLETTRAIN_PROMPT_ORDER:#(context|ruby|nvm)})
