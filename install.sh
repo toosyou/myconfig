@@ -138,6 +138,7 @@ printf "Time to change your default shell to zsh!\n"
 if [ $is_sudoer -eq 1 -a "$(uname -s)" != "Darwin" ]; then
     sudo usermod -s $(grep /zsh$ /etc/shells | tail -1) $USERNAME
 else
+	sudo echo $(which zsh) >> /etc/shells
     chsh -s $(which zsh)
     # cannot change shell
     if [ $? -ne 0 ]; then
