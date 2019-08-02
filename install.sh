@@ -95,18 +95,15 @@ fi
 ~/.vim/bundle/YouCompleteMe/install.py --clang-completer
 
 # fix vim_mru_files
-if [ `stat -c %U ~/.vim_mru_files` = "root" ]; then
+if [ "`stat -c %U ~/.vim_mru_files`" = "root" ]; then
     sudo chown $USERNAME:$USERNAME ~/.vim_mru_files
 fi
 
 # install oh-my-zsh, font, autosuggesion and zsh-syntax-highlighting
 ZSH_CUSTOM=~/.oh-my-zsh/custom
 # oh-my-zsh
-if [ "$(uname -s)" = "Darwin" ]; then # mac
-    sh -c "`wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O - | gsed 's/chsh -s/# chsh -s/g' | gsed 's/env zsh/# env zsh/g'`"
-else
-    sh -c "`wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O - | sed 's/chsh -s/# chsh -s/g' | sed 's/env zsh/# env zsh/g'`"
-fi
+RUNZSH='no' CHSH='no' sh -c "$(wget -O- https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
 
 wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/templates/zshrc.zsh-template -O ~/.zshrc
 # font
