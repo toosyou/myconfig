@@ -48,5 +48,27 @@ bash -c "$(wget https://raw.githubusercontent.com/toosyou/myconfig/master/instal
 - python3
 - pip3
 
+## If pip or pip3 does not work under Linux machine (Impoer Error: Cannot import name main), please try the following solution:
+```
+sudo vim /usr/bin/pip3 (or pip)
+or
+sudo vim $(which pip3) (or $(which pip))
+```
+
+and, change from
+```
+from pip import main
+if __name__ == '__main__':
+    sys.exit(main())
+```
+
+to 
+
+```
+from pip import __main__
+if __name__ == '__main__':
+    sys.exit(__main__._main())
+```
+
 # Contact me
 - email: toosyou.tw@gmail.com

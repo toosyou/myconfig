@@ -1,5 +1,7 @@
 #!/bin/bash
+set -e
 
+#get the root access first and check the OS type
 function git_get(){
     original_path=$(pwd)
     if cd $2; then # exists then update it
@@ -28,10 +30,12 @@ if [ $is_sudoer -eq 1 ]; then
 	    for i in zsh mosh vim tmux node install git wget python-dev python-pip python3-dev python3-pip nodejs xsel cmake; do
 	        sudo apt-get --yes --force-yes -f -m install $i
 	    done
+
 	    # fix 'no such file: /usr/local/bin/node' issue
 	    sudo ln -s /usr/bin/nodejs /usr/local/bin/node
 	elif [ "$(uname -s)" = "Darwin" ]; then # mac
 	    echo $(uname -s)
+
 	    # check if brew exists. If not, install it
 	    hash brew 2>/dev/null || /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 	    brew install wget zsh mosh tmux reattach-to-user-namespace
@@ -39,6 +43,10 @@ if [ $is_sudoer -eq 1 ]; then
         brew install thefuck cmake
         brew install vim && brew install macvim
         brew link macvim
+
+        # Alfons0329 add installation of pip and pip3
+        easy_install pip pip3
+        brew install git
         npm install -g bower
 	else
 	    echo $(uname -s)
@@ -60,12 +68,14 @@ fi
 min_tmux_version=2.0
 tmux_version=$(tmux -V| cut -d" " -f 2| tr -d $'\n'| tr -d $'\r')
 tmux_version_check=$(awk "BEGIN{ print ($tmux_version > $min_tmux_version) ? \"1\" : \"0\" }")
+
 if [ $tmux_version_check -eq 0 ];then # use mini tmux configure
     ln -sf $CLONE_PATH/tmux19.conf ~/.tmux.conf
 else
     # install tmux-package-manager(TPM)
     git_get https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
     ln -sf $CLONE_PATH/tmux.conf ~/.tmux.conf
+
     # install packages
     ~/.tmux/plugins/tpm/scripts/install_plugins.sh
 fi
@@ -102,6 +112,7 @@ else
 fi
 
 wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/templates/zshrc.zsh-template -O ~/.zshrc
+
 # font
 mkdir -p $ZSH_CUSTOM/themes
 wget -O $ZSH_CUSTOM/themes/bullet-train.zsh-theme https://raw.githubusercontent.com/caiogondim/bullet-train.zsh/master/bullet-train.zsh-theme
@@ -112,6 +123,7 @@ if [ "$(uname -s)" = "Darwin" ]; then # mac
 else
 	sed -i 's/ZSH_THEME=/ZSH_THEME="bullet-train" # /g' ~/.zshrc
 fi
+
 # autosuggesion
 git_get git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
 if [ "$(uname -s)" = "Darwin" ]; then # mac
@@ -139,6 +151,7 @@ if [ $is_sudoer -eq 1 -a "$(uname -s)" != "Darwin" ]; then
     sudo usermod -s $(grep /zsh$ /etc/shells | tail -1) $USERNAME
 else
     chsh -s $(which zsh)
+
     # cannot change shell
     if [ $? -ne 0 ]; then
         echo "***************************************"
