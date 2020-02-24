@@ -105,9 +105,9 @@ fi
 ~/.vim/bundle/YouCompleteMe/install.py --clang-completer
 
 # fix vim_mru_files
-if [ "`stat -c %U ~/.vim_mru_files`" = "root" ]; then
-    sudo chown $USERNAME:$USERNAME ~/.vim_mru_files
-fi
+# if [ "`stat -c %U ~/.vim_mru_files`" = "root" ]; then
+#     sudo chown $USERNAME:$USERNAME ~/.vim_mru_files
+# fi
 
 # install oh-my-zsh, font, autosuggesion and zsh-syntax-highlighting
 ZSH_CUSTOM=~/.oh-my-zsh/custom
