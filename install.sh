@@ -115,11 +115,11 @@ ZSH_CUSTOM=~/.oh-my-zsh/custom
 RUNZSH='no' CHSH='no' sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 
-wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/templates/zshrc.zsh-template -O ~/.zshrc
+curl https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/templates/zshrc.zsh-template -o ~/.zshrc
 
 # font
 mkdir -p $ZSH_CUSTOM/themes
-wget -O $ZSH_CUSTOM/themes/bullet-train.zsh-theme https://raw.githubusercontent.com/caiogondim/bullet-train.zsh/master/bullet-train.zsh-theme
+curl -o $ZSH_CUSTOM/themes/bullet-train.zsh-theme https://raw.githubusercontent.com/caiogondim/bullet-train.zsh/master/bullet-train.zsh-theme
 
 if [ "$(uname -s)" = "Darwin" ]; then # mac
     gsed -i 's/ZSH_THEME=/ZSH_THEME="bullet-train" # /g' ~/.zshrc
