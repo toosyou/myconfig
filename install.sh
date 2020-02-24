@@ -32,7 +32,7 @@ if [ $is_sudoer -eq 1 ]; then
 	    done
 
 	    # fix 'no such file: /usr/local/bin/node' issue
-	    sudo ln -s /usr/bin/nodejs /usr/local/bin/node
+	    # sudo ln -s /usr/bin/nodejs /usr/local/bin/node
 	elif [ "$(uname -s)" = "Darwin" ]; then # mac
 	    echo $(uname -s)
 
