@@ -112,8 +112,7 @@ fi
 # install oh-my-zsh, font, autosuggesion and zsh-syntax-highlighting
 ZSH_CUSTOM=~/.oh-my-zsh/custom
 # oh-my-zsh
-RUNZSH='no' CHSH='no' sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
+RUNZSH='no' CHSH='no' sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" || true
 
 curl https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/templates/zshrc.zsh-template -o ~/.zshrc
 
