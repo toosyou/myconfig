@@ -126,7 +126,7 @@ else
 fi
 
 # autosuggesion
-git_get git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 if [ "$(uname -s)" = "Darwin" ]; then # mac
     gsed -i 's/plugins=(/plugins=(zsh-autosuggestions /g' ~/.zshrc
 else
