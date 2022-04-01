@@ -44,8 +44,6 @@ if [ $is_sudoer -eq 1 ]; then
         brew install vim && brew install macvim
         brew link macvim
 
-        # Alfons0329 add installation of pip and pip3
-        easy_install pip pip3
         brew install git
         npm install -g bower
 	else
