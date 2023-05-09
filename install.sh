@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 
+export DEBIAN_FRONTEND=noninteractive
+
 #get the root access first and check the OS type
 function git_get(){
     original_path=$(pwd)
