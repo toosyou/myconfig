@@ -32,7 +32,7 @@ if [ $is_sudoer -eq 1 ]; then
 	    done
 
 	    # fix 'no such file: /usr/local/bin/node' issue
-	    sudo ln -s /usr/bin/nodejs /usr/local/bin/node
+	    sudo ln -sf /usr/bin/nodejs /usr/local/bin/node
 	elif [ "$(uname -s)" = "Darwin" ]; then # mac
 	    echo $(uname -s)
 
@@ -126,7 +126,7 @@ else
 fi
 
 # autosuggesion
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+git_get https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 if [ "$(uname -s)" = "Darwin" ]; then # mac
     gsed -i 's/plugins=(/plugins=(zsh-autosuggestions /g' ~/.zshrc
 else
