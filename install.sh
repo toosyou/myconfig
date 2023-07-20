@@ -28,10 +28,35 @@ done
 if [ $is_sudoer -eq 1 ]; then
 	if [ "$(uname -s)" = "Linux" ]; then
     	echo $(uname -s)
-	    sudo apt-get update
-	    for i in zsh mosh vim tmux git wget curl python3-dev python3-pip nodejs xsel cmake; do
-	        sudo apt-get --yes -f -m install $i
-	    done
+
+        packages=(
+            zsh
+            mosh
+            vim
+            vim-nox
+            tmux
+            git
+            wget
+            curl
+            python3-dev
+            python3-pip
+            nodejs
+            xsel
+            cmake
+            build-essential
+            mono-complete
+            golang
+            nodejs
+            openjdk-17-jdk
+            openjdk-17-jre
+            npm
+        )
+
+        sudo apt-get update
+
+        for package in "${packages[@]}"; do
+            sudo DEBIAN_FRONTEND=noninteractive apt-get --yes -f -m install "$package"
+        done
 
 	    # fix 'no such file: /usr/local/bin/node' issue
 	    sudo ln -sf /usr/bin/nodejs /usr/local/bin/node
@@ -42,7 +67,8 @@ if [ $is_sudoer -eq 1 ]; then
 	    hash brew 2>/dev/null || /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 	    brew install wget zsh mosh tmux reattach-to-user-namespace
 	    brew install git python3 node gnu-sed cmake
-        brew install thefuck cmake
+        brew install cmake
+        brew install go nodejs
         brew install vim && brew install macvim
         brew link macvim
 
@@ -60,11 +86,6 @@ USERNAME=`whoami`
 # git clone every thing
 CLONE_PATH=$HOME/.myconfig
 git_get https://github.com/toosyou/myconfig $CLONE_PATH
-
-# install thefuck if not exists
-if [ "$(uname -s)" = "Linux" ]; then
-    hash thefuck 2>/dev/null || pip3 install --user thefuck
-fi
 
 # link tmux configure
 min_tmux_version=2.0
@@ -102,7 +123,7 @@ else
     vim +PluginInstall +qall # install plugins
 fi
 
-~/.vim/bundle/YouCompleteMe/install.py --clang-completer
+python3 ~/.vim/bundle/YouCompleteMe/install.py --all
 
 # fix vim_mru_files
 if [ "`stat -c %U ~/.vim_mru_files`" = "root" ]; then
@@ -145,6 +166,9 @@ fi
 
 # append .zshrc
 echo "source $CLONE_PATH/zshrc" >> ~/.zshrc
+
+# move the cache file to $ZSH/cache/
+sed -i 's/source $ZSH\/oh-my-zsh.sh/export ZSH_COMPDUMP=$ZSH\/cache\/.zcompdump-$HOST\n&/' ~/.zshrc
 
 # chsh and switch to zsh
 printf "Time to change your default shell to zsh!\n"
