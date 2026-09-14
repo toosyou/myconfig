@@ -17,7 +17,6 @@ alias maek="make"
 alias amek="make"
 alias ll="ls -al"
 alias rm="rm -i"
-alias node="/usr/local/bin/node"
 
 TERM="xterm-256color"
 LC_CTYPE=en_US.UTF-8

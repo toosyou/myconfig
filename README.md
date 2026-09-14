@@ -1,8 +1,15 @@
 # myconfig
 Use `curl` or `wget` to install packages and configures!  
-Both **linux** and **macos** supported!  
+Linux only (Ubuntu/Debian, via `apt-get`).  
   
 **NOTE: myconfig will OVERWRITE your `oh-my-zsh`, `vim` and `tmux` configures!**
+  
+The installer asks whether to set up packages, zsh, vim, and tmux
+individually (default: yes to all). To automate it (e.g. in CI or Docker),
+set the corresponding env var before running the script and its prompt is
+skipped: `MYCONFIG_SUDOER`, `MYCONFIG_INSTALL_PACKAGES`,
+`MYCONFIG_INSTALL_ZSH`, `MYCONFIG_INSTALL_VIM`, `MYCONFIG_INSTALL_TMUX`
+(`1` or `0`). See [Testing](#testing) for the Docker-based test harness.
   
 **via curl**
 ```shell
@@ -21,7 +28,6 @@ bash -c "$(wget https://raw.githubusercontent.com/toosyou/myconfig/master/instal
 - Whole installation lasts about **one** minute, and you're ready to roll!  
 
 # Installed packages
-- [brew](https://brew.sh/) (macos only)
 - zsh  
     - [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)  
     - [bullet-train.zsh](https://github.com/caiogondim/bullet-train.zsh)  
@@ -30,12 +36,10 @@ bash -c "$(wget https://raw.githubusercontent.com/toosyou/myconfig/master/instal
     - [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)  
     - some **aliases** with commands that I always type wrong.  
 - [mosh](https://mosh.org/)
-- [thefuck](https://github.com/nvbn/thefuck)
 - vim  
     - [Vundle](https://github.com/VundleVim/Vundle.vim)  
     - [The ultimate Vim configuration: vimrc](https://github.com/amix/vimrc)  
     - [delimitMate](https://github.com/Raimondi/delimitMate)  
-    - [YouCompleteMe](https://github.com/Valloric/YouCompleteMe)(with C-family languages support)
 - tmux  
     - mouse support  
     - [Tmux Plugin Manager](https://github.com/tmux-plugins/tpm) (tmux >= 2.3)  
@@ -48,26 +52,17 @@ bash -c "$(wget https://raw.githubusercontent.com/toosyou/myconfig/master/instal
 - python3
 - pip3
 
-## If pip or pip3 does not work under Linux machine (Impoer Error: Cannot import name main), please try the following solution:
-```
-sudo vim /usr/bin/pip3 (or pip)
-or
-sudo vim $(which pip3) (or $(which pip))
-```
+# Testing
 
-and, change from
-```
-from pip import main
-if __name__ == '__main__':
-    sys.exit(main())
-```
+`Dockerfile` and `test.sh` run the installer end-to-end in a disposable
+Ubuntu container (as a non-root, `sudo`-capable user, exercising the same
+path a real laptop install takes) and assert that zsh became the login
+shell, `~/.tmux.conf`/`~/.vimrc` are wired up, and the Vundle/oh-my-zsh
+plugin directories are populated. Run it locally after changing
+`install.sh`:
 
-to 
-
-```
-from pip import __main__
-if __name__ == '__main__':
-    sys.exit(__main__._main())
+```shell
+./test.sh
 ```
 
 # Contact me
