@@ -102,6 +102,14 @@ if [ "$MYCONFIG_INSTALL_TMUX" -eq 1 ]; then
         git_get https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
         ln -sf $CLONE_PATH/tmux.conf ~/.tmux.conf
 
+        # TPM's `run` line in tmux.conf sets the TMUX_PLUGIN_MANAGER_PATH
+        # global env var when the server loads that config, so a server left
+        # running from before this install (common on a machine that isn't
+        # freshly provisioned) won't see the newly-linked config until it's
+        # explicitly re-sourced. `source-file` alone won't spawn a server if
+        # none is running, so start one first, same as TPM's own scripts do.
+        tmux start-server \; source-file ~/.tmux.conf
+
         # install packages
         ~/.tmux/plugins/tpm/scripts/install_plugins.sh
     fi
